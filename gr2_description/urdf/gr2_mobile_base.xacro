@@ -7,8 +7,44 @@
         <visual>
             <geometry>
                 <mesh filename="package://gr2_description/meshes/GR2_Main_Body.dae" />
-                <origin xyz="0 0 0" rpy="0 0 0" />
             </geometry>
+            <origin xyz="0.08 0 0" rpy="0 0 0" />
+        </visual>
+    </link>
+
+    <link name="left_front_wheel_link">
+        <visual>
+            <geometry>
+                <mesh filename="package://gr2_description/meshes/GR2_Wheel_Assembly.dae" />
+            </geometry>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+        </visual>
+    </link>
+
+    <link name="right_front_wheel_link">
+        <visual>
+            <geometry>
+                <mesh filename="package://gr2_description/meshes/GR2_Wheel_Assembly.dae" />
+            </geometry>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+        </visual>
+    </link>
+
+    <link name="right_back_wheel_link">
+        <visual>
+            <geometry>
+                <mesh filename="package://gr2_description/meshes/GR2_Wheel_Assembly.dae" />
+            </geometry>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+        </visual>
+    </link>
+
+    <link name="left_back_wheel_link">
+        <visual>
+            <geometry>
+                <mesh filename="package://gr2_description/meshes/GR2_Wheel_Assembly.dae" />
+            </geometry>
+            <origin xyz="0 0 0" rpy="0 0 0" />
         </visual>
     </link>
 
@@ -16,6 +52,34 @@
         <parent link="base_footprint" />
         <child link="base_link" />
         <origin xyz="0 0 0.015" rpy="0 0 0" />
+    </joint>
+
+    <joint name="left_front_wheel_joint" type="continuous" >
+        <parent link="base_link" />
+        <child link="left_front_wheel_link" />
+        <origin xyz="0.09 -0.075 0.0" rpy="0 0 1.57" />
+        <axis xyz="0 1 0" />
+    </joint>
+
+    <joint name="right_front_wheel_joint" type="continuous" >
+        <parent link="base_link" />
+        <child link="right_front_wheel_link" />
+        <origin xyz="-0.088 -0.075 0.0" rpy="0 0 -1.57" />
+        <axis xyz="0 1 0" />
+    </joint>
+
+    <joint name="right_back_wheel_joint" type="continuous" >
+        <parent link="base_link" />
+        <child link="right_back_wheel_link" />
+        <origin xyz="-0.088 0.052 0.0" rpy="0 0 -1.57" />
+        <axis xyz="0 1 0" />
+    </joint>
+
+    <joint name="left_back_wheel_joint" type="continuous" >
+        <parent link="base_link" />
+        <child link="left_back_wheel_link" />
+        <origin xyz="0.088 0.052 0.0" rpy="0 0 1.57" />
+        <axis xyz="0 1 0" />
     </joint>
 
 </robot>
