@@ -21,12 +21,30 @@
         </visual>
     </link>
 
+    <link name="right_horizontal_thruster_propeller_link">
+        <visual>
+            <geometry>
+                <mesh filename="package://reconbot_description/meshes/Propeller.dae" />
+            </geometry>
+            <origin xyz="-0.002 0 0" rpy="0 0 0" />
+        </visual>
+    </link>
+
     <link name="left_horizontal_thruster_link">
         <visual>
             <geometry>
                 <mesh filename="package://reconbot_description/meshes/ReconBot_Thruster.dae" />
             </geometry>
             <origin xyz="0.025 -0.135 -0.235" rpy="0 0 0" />
+        </visual>
+    </link>
+
+    <link name="left_horizontal_thruster_propeller_link">
+        <visual>
+            <geometry>
+                <mesh filename="package://reconbot_description/meshes/Propeller.dae" />
+            </geometry>
+            <origin xyz="-0.002 0 0" rpy="0 0 0" />
         </visual>
     </link>
 
@@ -39,12 +57,30 @@
         </visual>
     </link>
 
+    <link name="back_right_vertical_thruster_propeller_link">
+        <visual>
+            <geometry>
+                <mesh filename="package://reconbot_description/meshes/Propeller.dae" />
+            </geometry>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+        </visual>
+    </link>
+
     <link name="back_left_vertical_thruster_link">
         <visual>
             <geometry>
                 <mesh filename="package://reconbot_description/meshes/ReconBot_Thruster.dae" />
             </geometry>
             <origin xyz="0.09 -0.135 -0.22" rpy="0 -0.26 0" />
+        </visual>
+    </link>
+
+    <link name="back_left_vertical_thruster_propeller_link">
+        <visual>
+            <geometry>
+                <mesh filename="package://reconbot_description/meshes/Propeller.dae" />
+            </geometry>
+            <origin xyz="0 0 0" rpy="0 0 0" />
         </visual>
     </link>
 
@@ -57,12 +93,30 @@
         </visual>
     </link>
 
+    <link name="front_left_vertical_thruster_propeller_link">
+        <visual>
+            <geometry>
+                <mesh filename="package://reconbot_description/meshes/Propeller.dae" />
+            </geometry>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+        </visual>
+    </link>
+
     <link name="front_right_vertical_thruster_link">
         <visual>
             <geometry>
                 <mesh filename="package://reconbot_description/meshes/ReconBot_Thruster.dae" />
             </geometry>
             <origin xyz="0.10 -0.135 -0.22" rpy="0 -0.26 0" />
+        </visual>
+    </link>
+
+    <link name="front_right_vertical_thruster_propeller_link">
+        <visual>
+            <geometry>
+                <mesh filename="package://reconbot_description/meshes/Propeller.dae" />
+            </geometry>
+            <origin xyz="0 0 0" rpy="0 0 0" />
         </visual>
     </link>
 
@@ -78,10 +132,24 @@
         <origin xyz="-0.025 0.135 0.285" rpy="0 0 0" />
     </joint>
 
+    <joint name="right_horizontal_thruster_propeller_joint" type="continuous" >
+        <parent link="right_horizontal_thruster_link" />
+        <child link="right_horizontal_thruster_propeller_link" />
+        <origin xyz="0.0955 0 0" rpy="0 1.57 0" />
+        <axis xyz="0 0 1" />
+    </joint>
+
     <joint name="base_left_horizontal_thruster_joint" type="fixed" >
         <parent link="base_link" />
         <child link="left_horizontal_thruster_link" />
         <origin xyz="-0.025 -0.1175 0.292" rpy="3.14 0 0" />
+    </joint>
+
+    <joint name="left_horizontal_thruster_propeller_joint" type="continuous" >
+        <parent link="left_horizontal_thruster_link" />
+        <child link="left_horizontal_thruster_propeller_link" />
+        <origin xyz="0.0955 0 0" rpy="0 1.57 0" />
+        <axis xyz="0 0 1" />
     </joint>
 
     <joint name="base_back_right_vertical_thruster_joint" type="fixed" >
@@ -90,22 +158,50 @@
         <origin xyz="0.32 0.09 0.18" rpy="1.57 1.57 0" />
     </joint>
 
+    <joint name="back_right_vertical_thruster_propeller_joint" type="continuous" >
+        <parent link="back_right_vertical_thruster_link" />
+        <child link="back_right_vertical_thruster_propeller_link" />
+        <origin xyz="0.098 0.0022 -0.022" rpy="0 1.8326 0" />
+        <axis xyz="0 0 1" />
+    </joint>
+
     <joint name="base_back_left_vertical_thruster_joint" type="fixed" >
         <parent link="base_link" />
         <child link="back_left_vertical_thruster_link" />
         <origin xyz="0.32 -0.07 0.18" rpy="1.57 1.57 0" />
     </joint>
 
+    <joint name="back_left_vertical_thruster_propeller_joint" type="continuous" >
+        <parent link="back_left_vertical_thruster_link" />
+        <child link="back_left_vertical_thruster_propeller_link" />
+        <origin xyz="0.0942 0 0.029" rpy="0 1.309 0" />
+        <axis xyz="0 0 1" />
+    </joint>
+
     <joint name="base_front_left_vertical_thruster_joint" type="fixed" >
         <parent link="base_link" />
         <child link="front_left_vertical_thruster_link" />
-        <origin xyz="-0.39 -0.07 0.18" rpy="1.57 1.57 3.14" />
+        <origin xyz="-0.385 -0.07 0.18" rpy="1.57 1.57 3.14" />
+    </joint>
+
+    <joint name="front_left_vertical_thruster_propeller_joint" type="continuous" >
+        <parent link="front_left_vertical_thruster_link" />
+        <child link="front_left_vertical_thruster_propeller_link" />
+        <origin xyz="0.097 0 -0.023" rpy="0 1.8326 0" />
+        <axis xyz="0 0 1" />
     </joint>
 
     <joint name="base_front_right_vertical_thruster_joint" type="fixed" >
         <parent link="base_link" />
         <child link="front_right_vertical_thruster_link" />
-        <origin xyz="-0.39 0.1 0.18" rpy="0 1.57 1.57" />
+        <origin xyz="-0.385 0.09 0.19" rpy="0 1.57 1.57" />
+    </joint>
+
+    <joint name="front_right_vertical_thruster_propeller_joint" type="continuous" >
+        <parent link="front_right_vertical_thruster_link" />
+        <child link="front_right_vertical_thruster_propeller_link" />
+        <origin xyz="0.105 0 0.0285" rpy="0 1.309 0" />
+        <axis xyz="0 0 1" />
     </joint>
 
 </robot>
