@@ -10,12 +10,6 @@
             </geometry>
             <origin xyz="0 0 0.05" rpy="0 0 0" />
         </visual>
-        <collision>
-            <geometry>
-                <box size="" />
-            </geometry>
-            <origin xyz="0 0 0.05" rpy="0 0 0" />
-        </collision>
     </link>
 
     <xacro:macro name="thruster_link" params="prefix x y z p" >
@@ -60,20 +54,20 @@
         <origin xyz="0 0 0" rpy="0 0 0" />
     </joint>
 
-    <xacro:macro name="thruster_joint" params="prefix child x y z r p yw" >
-        <joint name="${prefix}_horizontal_thruster_joint" type="fixed" >
+    <xacro:macro name="thruster_joint" params="prefix x y z r p yw" >
+        <joint name="base_${prefix}_thruster_joint" type="fixed" >
             <parent link="base_link" />
-            <child link="${child}_thruster_link" />
+            <child link="${prefix}_thruster_link" />
             <origin xyz="${x} ${y} ${z}" rpy="${r} ${p} ${yw}" />
         </joint>
     </xacro:macro>
 
-    <xacro:thruster_joint prefix="base_right_horizontal" child="right_horizontal" x="-0.025" y="0.135" z="0.285" r="0" p="0" yw="0" />
-    <xacro:thruster_joint prefix="base_left_horizontal" child="left_horizontal" x="-0.025" y="-0.1175" z="0.292" r="3.14" p="0" yw="0" />
-    <xacro:thruster_joint prefix="base_back_right_vertical" child="back_right_vertical" x="0.32" y="0.09" z="0.18" r="1.57" p="1.57" yw="0" />
-    <xacro:thruster_joint prefix="base_back_left_vertical" child="back_left_vertical" x="0.32" y="-0.09" z="0.18" r="1.57" p="1.57" yw="0" />
-    <xacro:thruster_joint prefix="base_front_left_vertical" child="front_left_vertical" x="-0.385" y="-0.09" z="0.18" r="1.57" p="1.57" yw="3.14" />
-    <xacro:thruster_joint prefix="base_front_right_vertical" child="front_right_vertical" x="-0.385" y="0.09" z="0.18" r="1.57" p="1.57" yw="3.14" />
+    <xacro:thruster_joint prefix="right_horizontal" x="-0.025" y="0.135" z="0.285" r="0" p="0" yw="0" />
+    <xacro:thruster_joint prefix="left_horizontal" x="-0.025" y="-0.1175" z="0.292" r="3.14" p="0" yw="0" />
+    <xacro:thruster_joint prefix="back_right_vertical" x="0.32" y="0.09" z="0.18" r="1.57" p="1.57" yw="0" />
+    <xacro:thruster_joint prefix="back_left_vertical" x="0.32" y="-0.09" z="0.18" r="1.57" p="1.57" yw="0" />
+    <xacro:thruster_joint prefix="front_left_vertical" x="-0.385" y="-0.09" z="0.18" r="1.57" p="1.57" yw="3.14" />
+    <xacro:thruster_joint prefix="front_right_vertical" x="-0.385" y="0.09" z="0.18" r="1.57" p="1.57" yw="3.14" />
 
     <xacro:macro name="thruster_propeller_joint" params="prefix x y z p" >
         <joint name="${prefix}_thruster_propeller_joint" type="continuous" >
