@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<robot name="gr2" xmlns:xacro="http://www.ros.org/wiki/xacro">
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
     
     <link name="base_footprint" />
 
@@ -9,26 +9,54 @@
                 <mesh filename="package://reconbot_description/meshes/ReconBot_Main_Body.dae" />
             </geometry>
             <origin xyz="0 0 0.05" rpy="0 0 0" />
+            <material name="blue" />
         </visual>
+        <collision>
+            <geometry>
+                <box size="0.56 0.385 0.335" />
+            </geometry>
+            <origin xyz="-0.0325 0.01 0.165" rpy="0 0 0" />
+        </collision>
+        <inertial>
+            <mass value="60.57865524" />
+            <origin xyz="-0.02389211 0.11375312 -0.00664723" rpy="0 0 0" />
+            <inertia ixx="1.12548060" ixy="-0.00628401" ixz="-0.04074518" 
+                    iyy="3.07956336" iyz="0.00028181" 
+                    izz="2.63020163" />
+        </inertial>
     </link>
 
-    <xacro:macro name="thruster_link" params="prefix x y z p" >
+    <xacro:macro name="thruster_link" params="prefix x y z p cp" >
         <link name="${prefix}_thruster_link">
             <visual>
                 <geometry>
                     <mesh filename="package://reconbot_description/meshes/ReconBot_Thruster.dae" />
                 </geometry>
                 <origin xyz="${x} ${y} ${z}" rpy="0 ${p} 0" />
+                <material name="grey" />
             </visual>
+            <collision>
+                <geometry>
+                    <cylinder radius="0.065" length="0.178" />
+                </geometry>
+                <origin xyz="0 0 0" rpy="0 ${cp} 0" />
+            </collision>
+            <inertial>
+                <mass value="1.59521765" />
+                <origin xyz="0.09333322 -0.00629336 -0.00002714" rpy="0 0 0" />
+                <inertia ixx="0.00101028" ixy="-0.00019770" ixz="0.00000211" 
+                        iyy="0.00434934" iyz="-0.00000027" 
+                        izz="0.00462580" />
+            </inertial>
         </link>
     </xacro:macro>
 
-    <xacro:thruster_link prefix="right_horizontal" x="0.025" y="-0.135" z="-0.235" p="0" />
-    <xacro:thruster_link prefix="left_horizontal" x="0.025" y="-0.135" z="-0.235" p="0" />
-    <xacro:thruster_link prefix="back_right_vertical" x="-0.03" y="-0.135" z="-0.235" p="0.26" />
-    <xacro:thruster_link prefix="back_left_vertical" x="0.09" y="-0.135" z="-0.235" p="-0.26" />
-    <xacro:thruster_link prefix="front_left_vertical" x="-0.03" y="-0.135" z="-0.235" p="0.26" />
-    <xacro:thruster_link prefix="front_right_vertical" x="0.09" y="-0.135" z="-0.235" p="-0.26" />
+    <xacro:thruster_link prefix="right_horizontal" x="0.025" y="-0.135" z="-0.235" p="0" cp="1.57" />
+    <xacro:thruster_link prefix="left_horizontal" x="0.025" y="-0.135" z="-0.235" p="0" cp="1.57" />
+    <xacro:thruster_link prefix="back_right_vertical" x="-0.03" y="-0.135" z="-0.235" p="0.26" cp="1.8326" />
+    <xacro:thruster_link prefix="back_left_vertical" x="0.09" y="-0.135" z="-0.235" p="-0.26" cp="-1.8326"/>
+    <xacro:thruster_link prefix="front_left_vertical" x="-0.03" y="-0.135" z="-0.235" p="0.26" cp="1.8326"/>
+    <xacro:thruster_link prefix="front_right_vertical" x="0.09" y="-0.135" z="-0.235" p="-0.26" cp="-1.8326"/>
 
     <xacro:macro name="thruster_propeller_link" params="prefix x" >
         <link name="${prefix}_thruster_propeller_link">
@@ -37,7 +65,21 @@
                     <mesh filename="package://reconbot_description/meshes/Propeller.dae" />
                 </geometry>
                 <origin xyz="${x} 0 0" rpy="0 0 0" />
+                <material name="red" />
             </visual>
+            <collision>
+                <geometry>
+                    <cylinder radius="0.045" length="0.06" />
+                </geometry>
+                <origin xyz="0 0 0.02" rpy="0 0 0" />
+            </collision>
+            <inertial>
+                <mass value="0.12426508" />
+                <origin xyz="0.00000013 0.02194882 -0.00000005" rpy="0 0 0" />
+                <inertia ixx="0.00002949" ixy="-0.00000000" ixz="-0.00000000" 
+                        iyy="0.00001860" iyz="-0.00000000" 
+                        izz="0.00002949" />
+            </inertial>
         </link>
     </xacro:macro>
 

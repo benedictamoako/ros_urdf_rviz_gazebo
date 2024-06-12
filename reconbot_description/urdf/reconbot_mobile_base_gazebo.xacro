@@ -1,0 +1,63 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+    <gazebo reference="base_link">
+        <material>Gazebo/Blue</material>
+    </gazebo>
+
+    <gazebo reference="right_horizontal_thruster_link">
+        <material>Gazebo/Grey</material>
+    </gazebo>
+
+    <gazebo reference="left_horizontal_thruster_link">
+        <material>Gazebo/Grey</material>
+    </gazebo>
+
+    <gazebo reference="back_right_vertical_thruster_link">
+        <material>Gazebo/Grey</material>
+    </gazebo>
+    <gazebo reference="back_left_vertical_thruster_link">
+        <material>Gazebo/Grey</material>
+    </gazebo>
+
+    <gazebo reference="front_left_vertical_thruster_link">
+        <material>Gazebo/Grey</material>
+    </gazebo>
+
+    <gazebo reference="front_right_vertical_thruster_link">
+        <material>Gazebo/Grey</material>
+    </gazebo>
+
+    <gazebo reference="right_horizontal_thruster_propeller_link">
+        <material>Gazebo/Red</material>
+    </gazebo>
+
+    <gazebo reference="left_horizontal_thruster_propeller_link">
+        <material>Gazebo/Red</material>
+    </gazebo>
+    
+    <gazebo reference="back_right_vertical_thruster_propeller_link">
+        <material>Gazebo/Red</material>
+    </gazebo>
+
+    <gazebo reference="back_left_vertical_thruster_propeller_link">
+        <material>Gazebo/Red</material>
+    </gazebo>
+
+    <gazebo reference="front_left_vertical_thruster_propeller_link">
+        <material>Gazebo/Red</material>
+    </gazebo>
+
+    <gazebo reference="front_right_vertical_thruster_propeller_link">
+        <material>Gazebo/Red</material>
+    </gazebo>
+
+    <gazebo>
+        <plugin name="buoyancy_plugin" filename="libuuv_underwater_buoyancy_plugin.so">
+            <link_name>base_footprint</link_name>
+            <fluid_density>997</fluid_density>
+            <surface_height>0.0</surface_height>
+            <neutrally_buoyant>true</neutrally_buoyant>
+        </plugin> 
+    </gazebo>
+</robot>
