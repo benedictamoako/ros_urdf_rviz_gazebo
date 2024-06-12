@@ -10,115 +10,49 @@
             </geometry>
             <origin xyz="0 0 0.05" rpy="0 0 0" />
         </visual>
+        <collision>
+            <geometry>
+                <box size="" />
+            </geometry>
+            <origin xyz="0 0 0.05" rpy="0 0 0" />
+        </collision>
     </link>
 
-    <link name="right_horizontal_thruster_link">
-        <visual>
-            <geometry>
-                <mesh filename="package://reconbot_description/meshes/ReconBot_Thruster.dae" />
-            </geometry>
-            <origin xyz="0.025 -0.135 -0.235" rpy="0 0 0" />
-        </visual>
-    </link>
+    <xacro:macro name="thruster_link" params="prefix x y z p" >
+        <link name="${prefix}_thruster_link">
+            <visual>
+                <geometry>
+                    <mesh filename="package://reconbot_description/meshes/ReconBot_Thruster.dae" />
+                </geometry>
+                <origin xyz="${x} ${y} ${z}" rpy="0 ${p} 0" />
+            </visual>
+        </link>
+    </xacro:macro>
 
-    <link name="right_horizontal_thruster_propeller_link">
-        <visual>
-            <geometry>
-                <mesh filename="package://reconbot_description/meshes/Propeller.dae" />
-            </geometry>
-            <origin xyz="-0.002 0 0" rpy="0 0 0" />
-        </visual>
-    </link>
+    <xacro:thruster_link prefix="right_horizontal" x="0.025" y="-0.135" z="-0.235" p="0" />
+    <xacro:thruster_link prefix="left_horizontal" x="0.025" y="-0.135" z="-0.235" p="0" />
+    <xacro:thruster_link prefix="back_right_vertical" x="-0.03" y="-0.135" z="-0.235" p="0.26" />
+    <xacro:thruster_link prefix="back_left_vertical" x="0.09" y="-0.135" z="-0.235" p="-0.26" />
+    <xacro:thruster_link prefix="front_left_vertical" x="-0.03" y="-0.135" z="-0.235" p="0.26" />
+    <xacro:thruster_link prefix="front_right_vertical" x="0.09" y="-0.135" z="-0.235" p="-0.26" />
 
-    <link name="left_horizontal_thruster_link">
-        <visual>
-            <geometry>
-                <mesh filename="package://reconbot_description/meshes/ReconBot_Thruster.dae" />
-            </geometry>
-            <origin xyz="0.025 -0.135 -0.235" rpy="0 0 0" />
-        </visual>
-    </link>
+    <xacro:macro name="thruster_propeller_link" params="prefix x" >
+        <link name="${prefix}_thruster_propeller_link">
+            <visual>
+                <geometry>
+                    <mesh filename="package://reconbot_description/meshes/Propeller.dae" />
+                </geometry>
+                <origin xyz="${x} 0 0" rpy="0 0 0" />
+            </visual>
+        </link>
+    </xacro:macro>
 
-    <link name="left_horizontal_thruster_propeller_link">
-        <visual>
-            <geometry>
-                <mesh filename="package://reconbot_description/meshes/Propeller.dae" />
-            </geometry>
-            <origin xyz="-0.002 0 0" rpy="0 0 0" />
-        </visual>
-    </link>
-
-    <link name="back_right_vertical_thruster_link">
-        <visual>
-            <geometry>
-                <mesh filename="package://reconbot_description/meshes/ReconBot_Thruster.dae" />
-            </geometry>
-            <origin xyz="-0.03 -0.135 -0.235" rpy="0 0.26 0" />
-        </visual>
-    </link>
-
-    <link name="back_right_vertical_thruster_propeller_link">
-        <visual>
-            <geometry>
-                <mesh filename="package://reconbot_description/meshes/Propeller.dae" />
-            </geometry>
-            <origin xyz="0 0 0" rpy="0 0 0" />
-        </visual>
-    </link>
-
-    <link name="back_left_vertical_thruster_link">
-        <visual>
-            <geometry>
-                <mesh filename="package://reconbot_description/meshes/ReconBot_Thruster.dae" />
-            </geometry>
-            <origin xyz="0.09 -0.135 -0.22" rpy="0 -0.26 0" />
-        </visual>
-    </link>
-
-    <link name="back_left_vertical_thruster_propeller_link">
-        <visual>
-            <geometry>
-                <mesh filename="package://reconbot_description/meshes/Propeller.dae" />
-            </geometry>
-            <origin xyz="0 0 0" rpy="0 0 0" />
-        </visual>
-    </link>
-
-    <link name="front_left_vertical_thruster_link">
-        <visual>
-            <geometry>
-                <mesh filename="package://reconbot_description/meshes/ReconBot_Thruster.dae" />
-            </geometry>
-            <origin xyz="-0.03 -0.135 -0.235" rpy="0 0.26 0" />
-        </visual>
-    </link>
-
-    <link name="front_left_vertical_thruster_propeller_link">
-        <visual>
-            <geometry>
-                <mesh filename="package://reconbot_description/meshes/Propeller.dae" />
-            </geometry>
-            <origin xyz="0 0 0" rpy="0 0 0" />
-        </visual>
-    </link>
-
-    <link name="front_right_vertical_thruster_link">
-        <visual>
-            <geometry>
-                <mesh filename="package://reconbot_description/meshes/ReconBot_Thruster.dae" />
-            </geometry>
-            <origin xyz="0.10 -0.135 -0.22" rpy="0 -0.26 0" />
-        </visual>
-    </link>
-
-    <link name="front_right_vertical_thruster_propeller_link">
-        <visual>
-            <geometry>
-                <mesh filename="package://reconbot_description/meshes/Propeller.dae" />
-            </geometry>
-            <origin xyz="0 0 0" rpy="0 0 0" />
-        </visual>
-    </link>
+    <xacro:thruster_propeller_link prefix="right_horizontal" x="-0.002" />
+    <xacro:thruster_propeller_link prefix="left_horizontal" x="-0.002" />
+    <xacro:thruster_propeller_link prefix="back_right_vertical" x="0" />
+    <xacro:thruster_propeller_link prefix="back_left_vertical" x="0" />
+    <xacro:thruster_propeller_link prefix="front_left_vertical" x="0" />
+    <xacro:thruster_propeller_link prefix="front_right_vertical" x="0" />
 
     <joint name="base_joint" type="fixed" >
         <parent link="base_footprint" />
@@ -126,82 +60,35 @@
         <origin xyz="0 0 0" rpy="0 0 0" />
     </joint>
 
-    <joint name="base_right_horizontal_thruster_joint" type="fixed" >
-        <parent link="base_link" />
-        <child link="right_horizontal_thruster_link" />
-        <origin xyz="-0.025 0.135 0.285" rpy="0 0 0" />
-    </joint>
+    <xacro:macro name="thruster_joint" params="prefix child x y z r p yw" >
+        <joint name="${prefix}_horizontal_thruster_joint" type="fixed" >
+            <parent link="base_link" />
+            <child link="${child}_thruster_link" />
+            <origin xyz="${x} ${y} ${z}" rpy="${r} ${p} ${yw}" />
+        </joint>
+    </xacro:macro>
 
-    <joint name="right_horizontal_thruster_propeller_joint" type="continuous" >
-        <parent link="right_horizontal_thruster_link" />
-        <child link="right_horizontal_thruster_propeller_link" />
-        <origin xyz="0.0955 0 0" rpy="0 1.57 0" />
-        <axis xyz="0 0 1" />
-    </joint>
+    <xacro:thruster_joint prefix="base_right_horizontal" child="right_horizontal" x="-0.025" y="0.135" z="0.285" r="0" p="0" yw="0" />
+    <xacro:thruster_joint prefix="base_left_horizontal" child="left_horizontal" x="-0.025" y="-0.1175" z="0.292" r="3.14" p="0" yw="0" />
+    <xacro:thruster_joint prefix="base_back_right_vertical" child="back_right_vertical" x="0.32" y="0.09" z="0.18" r="1.57" p="1.57" yw="0" />
+    <xacro:thruster_joint prefix="base_back_left_vertical" child="back_left_vertical" x="0.32" y="-0.09" z="0.18" r="1.57" p="1.57" yw="0" />
+    <xacro:thruster_joint prefix="base_front_left_vertical" child="front_left_vertical" x="-0.385" y="-0.09" z="0.18" r="1.57" p="1.57" yw="3.14" />
+    <xacro:thruster_joint prefix="base_front_right_vertical" child="front_right_vertical" x="-0.385" y="0.09" z="0.18" r="1.57" p="1.57" yw="3.14" />
 
-    <joint name="base_left_horizontal_thruster_joint" type="fixed" >
-        <parent link="base_link" />
-        <child link="left_horizontal_thruster_link" />
-        <origin xyz="-0.025 -0.1175 0.292" rpy="3.14 0 0" />
-    </joint>
+    <xacro:macro name="thruster_propeller_joint" params="prefix x y z p" >
+        <joint name="${prefix}_thruster_propeller_joint" type="continuous" >
+            <parent link="${prefix}_thruster_link" />
+            <child link="${prefix}_thruster_propeller_link" />
+            <origin xyz="${x} ${y} ${z}" rpy="0 ${p} 0" />
+            <axis xyz="0 0 1" />
+        </joint>
+    </xacro:macro>
 
-    <joint name="left_horizontal_thruster_propeller_joint" type="continuous" >
-        <parent link="left_horizontal_thruster_link" />
-        <child link="left_horizontal_thruster_propeller_link" />
-        <origin xyz="0.0955 0 0" rpy="0 1.57 0" />
-        <axis xyz="0 0 1" />
-    </joint>
-
-    <joint name="base_back_right_vertical_thruster_joint" type="fixed" >
-        <parent link="base_link" />
-        <child link="back_right_vertical_thruster_link" />
-        <origin xyz="0.32 0.09 0.18" rpy="1.57 1.57 0" />
-    </joint>
-
-    <joint name="back_right_vertical_thruster_propeller_joint" type="continuous" >
-        <parent link="back_right_vertical_thruster_link" />
-        <child link="back_right_vertical_thruster_propeller_link" />
-        <origin xyz="0.098 0.0022 -0.022" rpy="0 1.8326 0" />
-        <axis xyz="0 0 1" />
-    </joint>
-
-    <joint name="base_back_left_vertical_thruster_joint" type="fixed" >
-        <parent link="base_link" />
-        <child link="back_left_vertical_thruster_link" />
-        <origin xyz="0.32 -0.07 0.18" rpy="1.57 1.57 0" />
-    </joint>
-
-    <joint name="back_left_vertical_thruster_propeller_joint" type="continuous" >
-        <parent link="back_left_vertical_thruster_link" />
-        <child link="back_left_vertical_thruster_propeller_link" />
-        <origin xyz="0.0942 0 0.029" rpy="0 1.309 0" />
-        <axis xyz="0 0 1" />
-    </joint>
-
-    <joint name="base_front_left_vertical_thruster_joint" type="fixed" >
-        <parent link="base_link" />
-        <child link="front_left_vertical_thruster_link" />
-        <origin xyz="-0.385 -0.07 0.18" rpy="1.57 1.57 3.14" />
-    </joint>
-
-    <joint name="front_left_vertical_thruster_propeller_joint" type="continuous" >
-        <parent link="front_left_vertical_thruster_link" />
-        <child link="front_left_vertical_thruster_propeller_link" />
-        <origin xyz="0.097 0 -0.023" rpy="0 1.8326 0" />
-        <axis xyz="0 0 1" />
-    </joint>
-
-    <joint name="base_front_right_vertical_thruster_joint" type="fixed" >
-        <parent link="base_link" />
-        <child link="front_right_vertical_thruster_link" />
-        <origin xyz="-0.385 0.09 0.19" rpy="0 1.57 1.57" />
-    </joint>
-
-    <joint name="front_right_vertical_thruster_propeller_joint" type="continuous" >
-        <parent link="front_right_vertical_thruster_link" />
-        <child link="front_right_vertical_thruster_propeller_link" />
-        <origin xyz="0.105 0 0.0285" rpy="0 1.309 0" />
-        <axis xyz="0 0 1" />
-    </joint>
+    <xacro:thruster_propeller_joint prefix="right_horizontal" x="0.0955" y="0" z="0" p="1.57" />
+    <xacro:thruster_propeller_joint prefix="left_horizontal" x="0.0955" y="0" z="0" p="1.57" />
+    <xacro:thruster_propeller_joint prefix="back_right_vertical" x="0.0985" y="0.0022" z="-0.022" p="1.8326" />
+    <xacro:thruster_propeller_joint prefix="back_left_vertical" x="0.0955" y="0.0022" z="0.0125" p="1.309" />
+    <xacro:thruster_propeller_joint prefix="front_left_vertical" x="0.0985" y="0.0022" z="-0.022" p="1.8326" />
+    <xacro:thruster_propeller_joint prefix="front_right_vertical" x="0.0955" y="0.0022" z="0.0125" p="1.309" />
 
 </robot>
