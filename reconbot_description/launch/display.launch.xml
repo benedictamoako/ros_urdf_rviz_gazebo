@@ -13,4 +13,9 @@
     <node pkg="joint_state_publisher_gui" exec="joint_state_publisher_gui" />
 
     <node pkg="rviz2" exec="rviz2" output="screen" args="-d $(var rviz_config_path)"/>
+
+    <!-- <include file="$(find-pkg-share gazebo_ros)/launch/gazebo.launch.py">
+        <arg name="world" value="$(find-pkg-share reconbot_description)/worlds/underwater_world.world"/>
+    </include> -->
+
 </launch>
