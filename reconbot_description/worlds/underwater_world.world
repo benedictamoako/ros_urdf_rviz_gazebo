@@ -76,7 +76,7 @@
       <real_time_update_rate>1000</real_time_update_rate>
     </physics>
     <scene>
-      <ambient>0.0 0.0 0.1 1.0</ambient> <!-- Set ambient light to simulate underwater lighting -->
+      <ambient>0.0 0.0 0.0 1.0</ambient> <!-- Set ambient light to simulate underwater lighting -->
       <background>0.0 0.0 0.2 1.0</background> <!-- Set background color to a dark blue to simulate deep water -->
       <fog>
         <type>exp2</type>
@@ -124,15 +124,17 @@
     </gui>
 
     <!-- Plugin for buoyancy -->
-    <plugin name="buoyancy_plugin" filename="libBuoyancyPlugin.so">
+    <!-- <plugin name="buoyancy_plugin" filename="libBuoyancyPlugin.so">
       <fluid_density>997</fluid_density>
-      <link name="base_link"/>
-    </plugin>
+      <link name="base_link" > -->
+        <!-- <volume>0.04203149</volume> -->
+      <!-- </link>
+    </plugin> -->
 
     <!-- Plugin for hydrodynamics -->
-    <plugin name="hydrodynamics_plugin" filename="libHydrodynamicsPlugin.so">
-      <link name="base_link"/>
-    </plugin>
+    <!-- <plugin name="hydrodynamics_plugin" filename="libHydrodynamicsPlugin.so">
+      <link name="base_footprint"/>
+    </plugin> -->
 
   </world>
 </sdf>

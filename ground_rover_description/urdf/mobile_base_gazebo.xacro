@@ -48,7 +48,7 @@
             <max_wheel_acceleration>1.0</max_wheel_acceleration> -->
 
             <!-- input -->
-            <!-- <command_topic>cmd_vel1</command_topic> -->
+            <!-- <command_topic>cmd_vel</command_topic> -->
 
             <!-- output -->
             <publish_odom>true</publish_odom>

@@ -19,10 +19,10 @@
         </collision>
         <inertial>
             <mass value="60.57865524" />
-            <origin xyz="-0.02389211 0.11375312 -0.00664723" rpy="0 0 0" />
-            <inertia ixx="1.12548060" ixy="-0.00628401" ixz="-0.04074518" 
-                    iyy="3.07956336" iyz="0.00028181" 
-                    izz="2.63020163" />
+            <origin xyz="0 0 0.1675" rpy="0 0 0" />
+            <inertia ixx="2.173711367" ixy="0" ixz="0" 
+                    iyy="1.252410727" iyz="0" 
+                    izz="2.346243207" />
         </inertial>
     </link>
 
@@ -43,10 +43,10 @@
             </collision>
             <inertial>
                 <mass value="1.59521765" />
-                <origin xyz="0.09333322 -0.00629336 -0.00002714" rpy="0 0 0" />
-                <inertia ixx="0.00101028" ixy="-0.00019770" ixz="0.00000211" 
-                        iyy="0.00434934" iyz="-0.00000027" 
-                        izz="0.00462580" />
+                <origin xyz="0 0 0.065" rpy="0 0 0" />
+                <inertia ixx="0.00706634094" ixy="0" ixz="0" 
+                        iyy="0.00706634094" iyz="0" 
+                        izz="0.00336989728" />
             </inertial>
         </link>
     </xacro:macro>
@@ -75,10 +75,10 @@
             </collision>
             <inertial>
                 <mass value="0.12426508" />
-                <origin xyz="0.00000013 0.02194882 -0.00000005" rpy="0 0 0" />
-                <inertia ixx="0.00002949" ixy="-0.00000000" ixz="-0.00000000" 
-                        iyy="0.00001860" iyz="-0.00000000" 
-                        izz="0.00002949" />
+                <origin xyz="0 0 0.045" rpy="0 0 0" />
+                <inertia ixx="0.00010018872" ixy="0" ixz="0" 
+                        iyy="0.00010018872" iyz="0" 
+                        izz="0.00012581839" />
             </inertial>
         </link>
     </xacro:macro>
