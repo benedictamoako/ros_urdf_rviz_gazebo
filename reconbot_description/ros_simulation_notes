@@ -1,0 +1,13 @@
+//publish the robot state publisher to the urdf in termial
+ros2 run robot_state_publisher robot_state_publisher --ros-args -p robot_description:="$(xacro /home/benedict/Documents/urdf_ros_tests/urdf/ground_rover_.urdf)"
+ros2 run joint_state_publisher_gui joint_state_publisher_gui
+ros2 run rviz2 rviz2
+
+//spawn robot in gazebo from terminal
+ros2 run robot_state_publisher robot_state_publisher --ros-args -p robot_description:="$(xacro /home/benedict/Documents/urdf_ros_tests/urdf/ground_rover.urdf.xacro)"
+ros2 launch gazebo_ros gazebo.launch.py
+ros2 run gazebo_ros spawn_entity.py -topic robot_description -entity ground_rover
+
+//publish to gazebo ros
+ros2 topic pub /cmd_vel geometry_msgs/msg/Twist "{linear: {x: -0.0}, angular: {z: -0.0}}"
+
