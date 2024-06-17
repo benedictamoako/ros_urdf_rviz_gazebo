@@ -3,6 +3,15 @@
     
     <link name="base_footprint" />
 
+    <!-- <link name="water_link">
+        <collision>
+            <geometry>
+                <box size="10 10 5" />
+            </geometry>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+        </collision>
+    </link> -->
+
     <link name="base_link">
         <visual>
             <geometry>
@@ -18,27 +27,14 @@
             <origin xyz="0 0 0.2" rpy="0 0 0" />
         </collision>
         <inertial>
-            <mass value="60.57865524" />
-            <origin xyz="0 0 0.1675" rpy="0 0 0" />
-            <inertia ixx="2.173711367" ixy="0" ixz="0" 
-                    iyy="1.252410727" iyz="0" 
-                    izz="2.346243207" />
+            <!-- <mass value="60.57865524" /> -->
+            <mass value="81.47" />
+            <origin xyz="0 0 0.2" rpy="0 0 0" />
+            <inertia ixx="1.12548060" ixy="-0.00628401" ixz="-0.04074518" 
+                    iyy="3.07956336" iyz="0.0028181" 
+                    izz="2.63020163" />
         </inertial>
 
-        <!-- Buoyancy Plugin -->
-        <plugin name='buoyancy' filename='libBuoyancyPlugin.so'>
-            <fluid_density>999.1026</fluid_density>
-            <center_of_volume>-0.0239 0.114 -0.007</center_of_volume>
-            <volume>0.00959081</volume>
-            <neutrally_buoyant>0</neutrally_buoyant>
-        </plugin>
-
-        <!-- Hydrodynamics Plugin -->
-        <plugin name='hydrodynamics_plugin' filename='libHydrodynamicsPlugin.so'>
-            <fluid_density>999.1026</fluid_density>
-            <linear_drag_coefficients>10.0 10.0 10.0</linear_drag_coefficients>
-            <angular_drag_coefficients>1.0 1.0 1.0</angular_drag_coefficients>
-        </plugin>
     </link>
 
     <xacro:macro name="thruster_link" params="prefix x y z p cx cp" >
@@ -58,10 +54,10 @@
             </collision>
             <inertial>
                 <mass value="1.59521765" />
-                <origin xyz="0 0 0.065" rpy="0 0 0" />
-                <inertia ixx="0.00706634094" ixy="0" ixz="0" 
-                        iyy="0.00706634094" iyz="0" 
-                        izz="0.00336989728" />
+                <origin xyz="0 0 0" rpy="0 0 0" />
+                <inertia ixx="0.00101028" ixy="-0.00019770" ixz="0.00000211" 
+                        iyy="0.00434934" iyz="-0.00000027" 
+                        izz="0.00462580" />
             </inertial>
         </link>
     </xacro:macro>
@@ -90,10 +86,10 @@
             </collision>
             <inertial>
                 <mass value="0.12426508" />
-                <origin xyz="0 0 0.045" rpy="0 0 0" />
-                <inertia ixx="0.00010018872" ixy="0" ixz="0" 
-                        iyy="0.00010018872" iyz="0" 
-                        izz="0.00012581839" />
+                <origin xyz="0 0 0" rpy="0 0 0" />
+                <inertia ixx="0.00002949" ixy="0" ixz="0" 
+                        iyy="0.00001860" iyz="0" 
+                        izz="0.00002949" />
             </inertial>
         </link>
     </xacro:macro>
@@ -104,6 +100,12 @@
     <xacro:thruster_propeller_link prefix="back_left_vertical" x="0" />
     <xacro:thruster_propeller_link prefix="front_left_vertical" x="0" />
     <xacro:thruster_propeller_link prefix="front_right_vertical" x="0" />
+
+    <!-- <joint name="base_water_joint" type="fixed" >
+        <parent link="base_footprint" />
+        <child link="water_link" />
+        <origin xyz="0 0 0" rpy="0 0 0" />
+    </joint> -->
 
     <joint name="base_joint" type="fixed" >
         <parent link="base_footprint" />
