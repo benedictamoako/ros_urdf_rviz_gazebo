@@ -8,14 +8,14 @@
             <geometry>
                 <mesh filename="package://reconbot_description/meshes/ReconBot_Main_Body.dae" />
             </geometry>
-            <origin xyz="0 0 0.05" rpy="0 0 0" />
+            <origin xyz="0 0 0.1" rpy="0 0 0" />
             <material name="blue" />
         </visual>
         <collision>
             <geometry>
-                <box size="0.56 0.385 0.335" />
+                <box size="0.62 0.380 0.32" />
             </geometry>
-            <origin xyz="-0.0325 0.01 0.165" rpy="0 0 0" />
+            <origin xyz="0 0 0.2" rpy="0 0 0" />
         </collision>
         <inertial>
             <mass value="60.57865524" />
@@ -24,9 +24,24 @@
                     iyy="1.252410727" iyz="0" 
                     izz="2.346243207" />
         </inertial>
+
+        <!-- Buoyancy Plugin -->
+        <plugin name='buoyancy' filename='libBuoyancyPlugin.so'>
+            <fluid_density>999.1026</fluid_density>
+            <center_of_volume>-0.0239 0.114 -0.007</center_of_volume>
+            <volume>0.00959081</volume>
+            <neutrally_buoyant>0</neutrally_buoyant>
+        </plugin>
+
+        <!-- Hydrodynamics Plugin -->
+        <plugin name='hydrodynamics_plugin' filename='libHydrodynamicsPlugin.so'>
+            <fluid_density>999.1026</fluid_density>
+            <linear_drag_coefficients>10.0 10.0 10.0</linear_drag_coefficients>
+            <angular_drag_coefficients>1.0 1.0 1.0</angular_drag_coefficients>
+        </plugin>
     </link>
 
-    <xacro:macro name="thruster_link" params="prefix x y z p cp" >
+    <xacro:macro name="thruster_link" params="prefix x y z p cx cp" >
         <link name="${prefix}_thruster_link">
             <visual>
                 <geometry>
@@ -39,7 +54,7 @@
                 <geometry>
                     <cylinder radius="0.065" length="0.178" />
                 </geometry>
-                <origin xyz="0 0 0" rpy="0 ${cp} 0" />
+                <origin xyz="${cx} 0 0" rpy="0 ${cp} 0" />
             </collision>
             <inertial>
                 <mass value="1.59521765" />
@@ -51,12 +66,12 @@
         </link>
     </xacro:macro>
 
-    <xacro:thruster_link prefix="right_horizontal" x="0.025" y="-0.135" z="-0.235" p="0" cp="1.57" />
-    <xacro:thruster_link prefix="left_horizontal" x="0.025" y="-0.135" z="-0.235" p="0" cp="1.57" />
-    <xacro:thruster_link prefix="back_right_vertical" x="-0.03" y="-0.135" z="-0.235" p="0.26" cp="1.8326" />
-    <xacro:thruster_link prefix="back_left_vertical" x="0.09" y="-0.135" z="-0.235" p="-0.26" cp="-1.8326"/>
-    <xacro:thruster_link prefix="front_left_vertical" x="-0.03" y="-0.135" z="-0.235" p="0.26" cp="1.8326"/>
-    <xacro:thruster_link prefix="front_right_vertical" x="0.09" y="-0.135" z="-0.235" p="-0.26" cp="-1.8326"/>
+    <xacro:thruster_link prefix="right_horizontal" x="0.025" y="-0.135" z="-0.235" p="0" cx="0" cp="1.57" />
+    <xacro:thruster_link prefix="left_horizontal" x="0.025" y="-0.135" z="-0.235" p="0" cx="0" cp="1.57" />
+    <xacro:thruster_link prefix="back_right_vertical" x="-0.08" y="-0.135" z="-0.235" p="0.26" cx="-0.05" cp="1.8326" />
+    <xacro:thruster_link prefix="back_left_vertical" x="0.04" y="-0.135" z="-0.235" p="-0.26" cx="-0.05" cp="-1.8326"/>
+    <xacro:thruster_link prefix="front_left_vertical" x="-0.08" y="-0.135" z="-0.235" p="0.26" cx="-0.05" cp="1.8326"/>
+    <xacro:thruster_link prefix="front_right_vertical" x="0.04" y="-0.135" z="-0.235" p="-0.26" cx="-0.05" cp="-1.8326"/>
 
     <xacro:macro name="thruster_propeller_link" params="prefix x" >
         <link name="${prefix}_thruster_propeller_link">
@@ -104,8 +119,8 @@
         </joint>
     </xacro:macro>
 
-    <xacro:thruster_joint prefix="right_horizontal" x="-0.025" y="0.135" z="0.285" r="0" p="0" yw="0" />
-    <xacro:thruster_joint prefix="left_horizontal" x="-0.025" y="-0.1175" z="0.292" r="3.14" p="0" yw="0" />
+    <xacro:thruster_joint prefix="right_horizontal" x="-0.025" y="0.135" z="0.335" r="0" p="0" yw="0" />
+    <xacro:thruster_joint prefix="left_horizontal" x="-0.025" y="-0.1175" z="0.342" r="3.14" p="0" yw="0" />
     <xacro:thruster_joint prefix="back_right_vertical" x="0.32" y="0.09" z="0.18" r="1.57" p="1.57" yw="0" />
     <xacro:thruster_joint prefix="back_left_vertical" x="0.32" y="-0.09" z="0.18" r="1.57" p="1.57" yw="0" />
     <xacro:thruster_joint prefix="front_left_vertical" x="-0.385" y="-0.09" z="0.18" r="1.57" p="1.57" yw="3.14" />
@@ -122,9 +137,9 @@
 
     <xacro:thruster_propeller_joint prefix="right_horizontal" x="0.0955" y="0" z="0" p="1.57" />
     <xacro:thruster_propeller_joint prefix="left_horizontal" x="0.0955" y="0" z="0" p="1.57" />
-    <xacro:thruster_propeller_joint prefix="back_right_vertical" x="0.0985" y="0.0022" z="-0.022" p="1.8326" />
-    <xacro:thruster_propeller_joint prefix="back_left_vertical" x="0.0955" y="0.0022" z="0.0125" p="1.309" />
-    <xacro:thruster_propeller_joint prefix="front_left_vertical" x="0.0985" y="0.0022" z="-0.022" p="1.8326" />
-    <xacro:thruster_propeller_joint prefix="front_right_vertical" x="0.0955" y="0.0022" z="0.0125" p="1.309" />
+    <xacro:thruster_propeller_joint prefix="back_right_vertical" x="0.0485" y="0.0022" z="-0.022" p="1.8326" />
+    <xacro:thruster_propeller_joint prefix="back_left_vertical" x="0.0455" y="0.0022" z="0.0125" p="1.309" />
+    <xacro:thruster_propeller_joint prefix="front_left_vertical" x="0.0485" y="0.0022" z="-0.022" p="1.8326" />
+    <xacro:thruster_propeller_joint prefix="front_right_vertical" x="0.0455" y="0.0022" z="0.0125" p="1.309" />
 
 </robot>

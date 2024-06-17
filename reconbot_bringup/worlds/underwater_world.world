@@ -1,0 +1,28 @@
+<?xml version="1.0" ?>
+<sdf version="1.4">
+  <world name="default">
+    <include>
+      <uri>model://ground_plane</uri>
+    </include>
+    <include>
+      <uri>model://sun</uri>
+    </include>
+    
+    <plugin name='buoyancy' filename='libBuoyancyPlugin.so'>
+        <fluid_density>999.1026</fluid_density>
+        <link name="base_link">
+            <center_of_volume>-0.0239 0.114 -0.007</center_of_volume>
+            <volume>0.00959081</volume>
+            <neutrally_buoyant>0</neutrally_buoyant>
+        </link>
+    </plugin>
+
+    <plugin name='hydrodynamics_plugin' filename='libHydrodynamicsPlugin.so'>
+      <link_name>base_link</link_name>
+      <fluid_density>999.1026</fluid_density>
+      <linear_drag_coefficients>10.0 10.0 10.0</linear_drag_coefficients>
+      <angular_drag_coefficients>1.0 1.0 1.0</angular_drag_coefficients>
+    </plugin>
+
+  </world>
+</sdf>

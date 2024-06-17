@@ -52,8 +52,23 @@
         <material>Gazebo/Red</material>
     </gazebo>
 
-    <plugin name='buoyancy' filename='libBuoyancyPlugin.so'>
+    
+    <!-- <plugin name='buoyancy_plugin' filename='libBuoyancyPlugin.so'>
+        <fluid_density>997</fluid_density>
+        <link name='base_link'>
+          <center_of_buoyancy>0 0 0.1</center_of_buoyancy>
+          <volume>100000</volume>
+          <neutrally_buoyant>0</neutrally_buoyant>
+        </link>
+      </plugin> -->
+
+    <!-- <gazebo>
+        <plugin name='hydrodynamics_plugin' filename='libHydrodynamicsPlugin.so'>
+        <link_name>base_link</link_name>
         <fluid_density>999.1026</fluid_density>
-    </plugin>
+        <linear_drag_coefficients>10.0 10.0 10.0</linear_drag_coefficients>
+        <angular_drag_coefficients>1.0 1.0 1.0</angular_drag_coefficients>
+        </plugin>
+    </gazebo> -->
     
 </robot>
