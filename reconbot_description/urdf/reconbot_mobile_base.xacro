@@ -3,15 +3,6 @@
     
     <link name="base_footprint" />
 
-    <!-- <link name="water_link">
-        <collision>
-            <geometry>
-                <box size="10 10 5" />
-            </geometry>
-            <origin xyz="0 0 0" rpy="0 0 0" />
-        </collision>
-    </link> -->
-
     <link name="base_link">
         <visual>
             <geometry>
@@ -24,12 +15,12 @@
             <geometry>
                 <box size="0.62 0.380 0.32" />
             </geometry>
-            <origin xyz="0 0 0.2" rpy="0 0 0" />
+            <origin xyz="-0.025 0 0.2" rpy="0 0 0" />
         </collision>
         <inertial>
             <!-- <mass value="60.57865524" /> -->
-            <mass value="81.47" />
-            <origin xyz="0 0 0.2" rpy="0 0 0" />
+            <mass value="81.46" />
+            <origin xyz="-0.025 0 0.2" rpy="0 0 0" />
             <inertia ixx="1.12548060" ixy="-0.00628401" ixz="-0.04074518" 
                     iyy="3.07956336" iyz="0.0028181" 
                     izz="2.63020163" />
@@ -100,12 +91,6 @@
     <xacro:thruster_propeller_link prefix="back_left_vertical" x="0" />
     <xacro:thruster_propeller_link prefix="front_left_vertical" x="0" />
     <xacro:thruster_propeller_link prefix="front_right_vertical" x="0" />
-
-    <!-- <joint name="base_water_joint" type="fixed" >
-        <parent link="base_footprint" />
-        <child link="water_link" />
-        <origin xyz="0 0 0" rpy="0 0 0" />
-    </joint> -->
 
     <joint name="base_joint" type="fixed" >
         <parent link="base_footprint" />

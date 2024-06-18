@@ -52,34 +52,24 @@
         <material>Gazebo/Red</material>
     </gazebo>
 
-    <xacro:macro name="buoyancy_plugin_link" params="link volume cobx">
-        <gazebo>
-            <plugin name='buoyancy_plugin' filename='libBuoyancyPlugin.so'>
-                <fluid_density>999.1026</fluid_density>
-                <link name='${link}'>
-                <center_of_buoyancy>0 0 ${cobx}</center_of_buoyancy>
-                <volume>${volume}</volume>
-                <neutrally_buoyant>0</neutrally_buoyant>
-                </link>
-            </plugin>
-        </gazebo>
-
-        <gazebo>
-            <plugin name='hydrodynamics_plugin' filename='libHydrodynamicsPlugin.so'>
-            <link_name>${link}</link_name>
+    <gazebo>
+        <plugin name='buoyancy_plugin' filename='libBuoyancyPlugin.so'>
             <fluid_density>999.1026</fluid_density>
-            <linear_drag_coefficients>10.0 10.0 10.0</linear_drag_coefficients>
-            <angular_drag_coefficients>1.0 1.0 1.0</angular_drag_coefficients>
-            </plugin>
-        </gazebo>
-    </xacro:macro>
-    
-    <xacro:buoyancy_plugin_link link="base_link" volume="0.00959081" cobx="0.25" />
-    <!-- <xacro:buoyancy_plugin_link link="right_horizontal_thruster_link" volume="0.00031572" cobx="0" />
-    <xacro:buoyancy_plugin_link link="left_horizontal_thruster_link" volume="0.00031572" cobx="0" />
-    <xacro:buoyancy_plugin_link link="back_right_vertical_thruster_link" volume="0.00031572" cobx="0" />
-    <xacro:buoyancy_plugin_link link="back_left_vertical_thruster_link" volume="0.00031572" cobx="0" />
-    <xacro:buoyancy_plugin_link link="front_left_vertical_thruster_link" volume="0.00031572" cobx="0" />
-    <xacro:buoyancy_plugin_link link="front_right_vertical_thruster_link" volume="0.00031572" cobx="0" /> -->
+            <link name='base_link'>
+            <center_of_buoyancy>-0.025 0 0.25</center_of_buoyancy>
+            <volume>0.00959081</volume>
+            <neutrally_buoyant>0</neutrally_buoyant>
+            </link>
+        </plugin>
+    </gazebo>
+
+    <gazebo>
+        <plugin name='hydrodynamics_plugin' filename='libHydrodynamicsPlugin.so'>
+        <link_name>base_link</link_name>
+        <fluid_density>999.1026</fluid_density>
+        <linear_drag_coefficients>10.0 10.0 10.0</linear_drag_coefficients>
+        <angular_drag_coefficients>1.0 1.0 1.0</angular_drag_coefficients>
+        </plugin>
+    </gazebo>
 
 </robot>
