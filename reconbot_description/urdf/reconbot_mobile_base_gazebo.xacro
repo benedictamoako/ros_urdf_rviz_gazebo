@@ -93,4 +93,11 @@
         </sensor>
     </gazebo>
 
+    <gazebo>
+        <plugin name="rov_interface_plugin" filename="librov_interface_plugin.so">
+            <left_horizontal_propeller_joint>left_horizontal_propeller_joint</left_horizontal_propeller_joint>
+            <right_horizontal_propeller_joint>right_horizontal_propeller_joint</right_horizontal_propeller_joint>
+        </plugin>
+    </gazebo>
+
 </robot>
