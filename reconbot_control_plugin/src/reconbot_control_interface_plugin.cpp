@@ -28,7 +28,7 @@ namespace gazebo
     this->left_horizontal_propeller_sub = this->node->create_subscription<std_msgs::msg::Float64>(
       "/left_horizontal_propeller_cmd", 1, std::bind(&RECONBOTControlInterfacePlugin::OnLeftHorizontalPropellerCmd, this, std::placeholders::_1));
     this->right_horizontal_propeller_sub = this->node->create_subscription<std_msgs::msg::Float64>(
-      "/right_horizontal_propeller_cmd", 1, std::bind(&RECONBOTControlInterfacePlugin::OnRighthorizontalPropellerCmd, this, std::placeholders::_1));
+      "/right_horizontal_propeller_cmd", 1, std::bind(&RECONBOTControlInterfacePlugin::OnRightHorizontalPropellerCmd, this, std::placeholders::_1));
 
     // Start a thread to spin the node
     rclcpp::executors::SingleThreadedExecutor exec;
