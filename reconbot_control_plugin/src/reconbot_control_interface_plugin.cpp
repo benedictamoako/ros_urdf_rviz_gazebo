@@ -1,4 +1,4 @@
-#include "reconbot_control_plugin/reconbot_control_interface_plugin.hpp"
+#include "/home/benedict/ros2_ws/src/reconbot_control_plugin/include/reconbot_control_plugin/reconbot_control_interface_plugin.hpp"
 
 namespace gazebo
 {
@@ -22,18 +22,32 @@ namespace gazebo
     }
 
     // Initialize ROS 2 node
-    this->node = std::make_shared<rclcpp::Node>("reconbot_control_interface_plugin");
+    this->node = gazebo_ros::Node::Get(_sdf);
 
     // ROS 2 subscribers for propeller commands
+    this->cmd_vel_sub = this->node->create_subscription<geometry_msgs::msg::Twist>(
+      "/cmd_vel", 1, std::bind(&RECONBOTControlInterfacePlugin::OnCmdVel, this, std::placeholders::_1));
     this->left_horizontal_propeller_sub = this->node->create_subscription<std_msgs::msg::Float64>(
       "/left_horizontal_propeller_cmd", 1, std::bind(&RECONBOTControlInterfacePlugin::OnLeftHorizontalPropellerCmd, this, std::placeholders::_1));
     this->right_horizontal_propeller_sub = this->node->create_subscription<std_msgs::msg::Float64>(
       "/right_horizontal_propeller_cmd", 1, std::bind(&RECONBOTControlInterfacePlugin::OnRightHorizontalPropellerCmd, this, std::placeholders::_1));
 
-    // Start a thread to spin the node
-    rclcpp::executors::SingleThreadedExecutor exec;
-    exec.add_node(this->node);
-    std::thread([exec]() mutable { exec.spin(); }).detach();
+    // Register for simulation update
+    this->update_connection = event::Events::ConnectWorldUpdateBegin(
+      std::bind(&RECONBOTControlInterfacePlugin::UpdateState, this));
+  }
+
+  void RECONBOTControlInterfacePlugin::OnCmdVel(const geometry_msgs::msg::Twist::SharedPtr msg)
+  {
+    // Convert cmd_vel to individual propeller velocities
+    double linear = msg->linear.x;
+    double angular = msg->angular.z;
+
+    double left_velocity = linear - angular;
+    double right_velocity = linear + angular;
+
+    this->left_horizontal_propeller_joint->SetVelocity(0, left_velocity);
+    this->right_horizontal_propeller_joint->SetVelocity(0, right_velocity);
   }
 
   void RECONBOTControlInterfacePlugin::OnLeftHorizontalPropellerCmd(const std_msgs::msg::Float64::SharedPtr msg)
@@ -41,8 +55,13 @@ namespace gazebo
     this->left_horizontal_propeller_joint->SetVelocity(0, msg->data);
   }
 
-  void RECONBOTControlInterfacePlugin::OnRighthorizontalPropellerCmd(const std_msgs::msg::Float64::SharedPtr msg)
+  void RECONBOTControlInterfacePlugin::OnRightHorizontalPropellerCmd(const std_msgs::msg::Float64::SharedPtr msg)
   {
     this->right_horizontal_propeller_joint->SetVelocity(0, msg->data);
+  }
+
+  void RECONBOTControlInterfacePlugin::UpdateState()
+  {
+    // Publish robot state to /tf (implementation needed)
   }
 }

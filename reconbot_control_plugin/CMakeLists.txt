@@ -15,13 +15,25 @@ find_package(rclcpp REQUIRED)
 find_package(std_msgs REQUIRED)
 find_package(geometry_msgs REQUIRED)
 find_package(gazebo_ros REQUIRED)
+find_package(gazebo_dev REQUIRED)
 
 add_compile_options(-std=c++14)
 
-include_directories(include ${GAZEBO_INCLUDE_DIRS})
+include_directories(
+  include 
+  ${GAZEBO_INCLUDE_DIRS}
+  ${geometry_msgs_INCLUDE_DIRS}
+  )
 
 add_library(reconbot_control_interface_plugin SHARED src/reconbot_control_interface_plugin.cpp)
-ament_target_dependencies(reconbot_control_interface_plugin rclcpp std_msgs gazebo_ros)
+
+ament_target_dependencies(
+  reconbot_control_interface_plugin 
+  rclcpp 
+  std_msgs 
+  geometry_msgs
+  gazebo_ros
+  )
 
 install(TARGETS reconbot_control_interface_plugin
   LIBRARY DESTINATION lib)
