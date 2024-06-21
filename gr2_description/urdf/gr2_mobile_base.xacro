@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
-<robot name="gr2" xmlns:xacro="http://www.ros.org/wiki/xacro">
-    
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
     <link name="base_footprint" />
 
     <link name="base_link">
@@ -9,77 +9,73 @@
                 <mesh filename="package://gr2_description/meshes/GR2_Main_Body.dae" />
             </geometry>
             <origin xyz="0.08 0 0" rpy="0 0 0" />
+            <material name="grey" />
         </visual>
+        <collision>
+            <geometry>
+                <box size="0.140 0.160 0.143" />
+            </geometry>
+            <origin xyz="0.0015 -0.015 0.055" rpy="0 0 0" />
+        </collision>
+        <inertial>
+            <mass value="0.715" />
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <inertia ixx="0.003" ixy="6.408e-5" ixz="-6.085e-5" 
+                    iyy="0.002" iyz="-1.701e-6" 
+                    izz="0.003" />
+        </inertial>
     </link>
 
-    <link name="left_front_wheel_link">
-        <visual>
-            <geometry>
-                <mesh filename="package://gr2_description/meshes/GR2_Wheel_Assembly.dae" />
-            </geometry>
-            <origin xyz="0 0 0" rpy="0 0 0" />
-        </visual>
-    </link>
+    <xacro:macro name="wheel_link" params="prefix" >
+        <link name="${prefix}_wheel_link">
+            <visual>
+                <geometry>
+                    <mesh filename="package://gr2_description/meshes/GR2_Wheel_Assembly.dae" />
+                </geometry>
+                <origin xyz="0 0 0" rpy="0 0 0" />
+                <material name="blue" />
+            </visual>
+            <collision>
+                <geometry>
+                    <cylinder radius="0.031" length="0.047" />
+                </geometry>
+                <origin xyz="0 0 0" rpy="1.57 0 0" />
+            </collision>
+            <inertial>
+                <mass value="0.062" />
+                <origin xyz="0 0 0" rpy="0 0 0" />
+                <inertia ixx="2.527e-5" ixy="4.039e-11" ixz="2.637e-12" 
+                        iyy="1.528e-5" iyz="9.797e-11" 
+                        izz="1.528e-5" />
+            </inertial>
+        </link>
+    </xacro:macro>
 
-    <link name="right_front_wheel_link">
-        <visual>
-            <geometry>
-                <mesh filename="package://gr2_description/meshes/GR2_Wheel_Assembly.dae" />
-            </geometry>
-            <origin xyz="0 0 0" rpy="0 0 0" />
-        </visual>
-    </link>
+    <xacro:wheel_link prefix="left_front" />
+    <xacro:wheel_link prefix="right_front" />
+    <xacro:wheel_link prefix="left_back" />
+    <xacro:wheel_link prefix="right_back" />
 
-    <link name="right_back_wheel_link">
-        <visual>
-            <geometry>
-                <mesh filename="package://gr2_description/meshes/GR2_Wheel_Assembly.dae" />
-            </geometry>
-            <origin xyz="0 0 0" rpy="0 0 0" />
-        </visual>
-    </link>
-
-    <link name="left_back_wheel_link">
-        <visual>
-            <geometry>
-                <mesh filename="package://gr2_description/meshes/GR2_Wheel_Assembly.dae" />
-            </geometry>
-            <origin xyz="0 0 0" rpy="0 0 0" />
-        </visual>
-    </link>
 
     <joint name="base_joint" type="fixed" >
         <parent link="base_footprint" />
         <child link="base_link" />
-        <origin xyz="0 0 0.015" rpy="0 0 0" />
+        <origin xyz="0 0 0.05" rpy="0 0 0" />
     </joint>
 
-    <joint name="left_front_wheel_joint" type="continuous" >
-        <parent link="base_link" />
-        <child link="left_front_wheel_link" />
-        <origin xyz="0.09 -0.075 0.0" rpy="0 0 1.57" />
-        <axis xyz="0 1 0" />
-    </joint>
+    <xacro:macro name="wheel_joint" params="prefix x y yw ay" >
+        <joint name="base_${prefix}_wheel_joint" type="continuous" >
+            <parent link="base_link" />
+            <child link="${prefix}_wheel_link" />
+            <origin xyz="${x} ${y} 0.0" rpy="0 0 ${yw}" />
+            <axis xyz="0 ${ay} 0" />
+        </joint>
+    </xacro:macro>
 
-    <joint name="right_front_wheel_joint" type="continuous" >
-        <parent link="base_link" />
-        <child link="right_front_wheel_link" />
-        <origin xyz="-0.088 -0.075 0.0" rpy="0 0 -1.57" />
-        <axis xyz="0 1 0" />
-    </joint>
+    <xacro:wheel_joint prefix="left_front" x="0.09" y="-0.075" yw="1.57" ay="-1" />
+    <xacro:wheel_joint prefix="right_front" x="-0.088" y="-0.075" yw="-1.57" ay="1" />
+    <xacro:wheel_joint prefix="left_back" x="0.088" y="0.052" yw="1.57" ay="-1" />
+    <xacro:wheel_joint prefix="right_back" x="-0.088" y="0.052" yw="-1.57" ay="1" />
 
-    <joint name="right_back_wheel_joint" type="continuous" >
-        <parent link="base_link" />
-        <child link="right_back_wheel_link" />
-        <origin xyz="-0.088 0.052 0.0" rpy="0 0 -1.57" />
-        <axis xyz="0 1 0" />
-    </joint>
-
-    <joint name="left_back_wheel_joint" type="continuous" >
-        <parent link="base_link" />
-        <child link="left_back_wheel_link" />
-        <origin xyz="0.088 0.052 0.0" rpy="0 0 1.57" />
-        <axis xyz="0 1 0" />
-    </joint>
 
 </robot>

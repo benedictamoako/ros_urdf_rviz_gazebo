@@ -119,8 +119,6 @@
             <child link="${prefix}_thruster_propeller_link" />
             <origin xyz="${x} ${y} ${z}" rpy="0 ${p} 0" />
             <axis xyz="0 0 1" />
-            <!-- <limit effort="100" velocity="0"/> -->
-            <!-- <dynamics damping="0.1" friction="0.1"/> -->
         </joint>
     </xacro:macro>
 
@@ -130,5 +128,16 @@
     <xacro:thruster_propeller_joint prefix="back_left_vertical" x="0.0455" y="0.0022" z="0.0125" p="1.309" />
     <xacro:thruster_propeller_joint prefix="front_left_vertical" x="0.0485" y="0.0022" z="-0.022" p="1.8326" />
     <xacro:thruster_propeller_joint prefix="front_right_vertical" x="0.0455" y="0.0022" z="0.0125" p="1.309" />
+
+     <!-- Transmission for the thruster -->
+    <transmission name="right_horizontal_thruster_propeller_trans">
+        <type>transmission_interface/SimpleTransmission</type>
+        <joint name="right_horizontal_thruster_propeller_joint">
+        <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+        </joint>
+        <actuator name="right_horizontal_thruster">
+        <mechanicalReduction>1</mechanicalReduction>
+        </actuator>
+    </transmission>
 
 </robot>

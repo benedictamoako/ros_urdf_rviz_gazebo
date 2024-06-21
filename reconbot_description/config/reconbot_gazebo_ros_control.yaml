@@ -1,0 +1,8 @@
+reconbot:
+  joint_state_controller:
+    type: joint_state_controller/JointStateController
+    publish_rate: 50
+
+  thruster_controller:
+    type: effort_controllers/JointEffortController
+    joint: right_horizontal_thruster_propeller_joint

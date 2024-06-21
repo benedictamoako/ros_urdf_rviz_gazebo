@@ -93,10 +93,16 @@
         </sensor>
     </gazebo>
 
-    <gazebo>
+    <!-- <gazebo>
         <plugin name="rov_interface_plugin" filename="librov_interface_plugin.so">
             <left_horizontal_propeller_joint>left_horizontal_propeller_joint</left_horizontal_propeller_joint>
             <right_horizontal_propeller_joint>right_horizontal_propeller_joint</right_horizontal_propeller_joint>
+        </plugin>
+    </gazebo> -->
+
+    <gazebo>
+        <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
+            <robotNamespace>/reconbot</robotNamespace>
         </plugin>
     </gazebo>
 
