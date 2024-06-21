@@ -130,7 +130,7 @@
     <xacro:thruster_propeller_joint prefix="front_right_vertical" x="0.0455" y="0.0022" z="0.0125" p="1.309" />
 
      <!-- Transmission for the thruster -->
-    <transmission name="right_horizontal_thruster_propeller_trans">
+    <!-- <transmission name="right_horizontal_thruster_propeller_trans">
         <type>transmission_interface/SimpleTransmission</type>
         <joint name="right_horizontal_thruster_propeller_joint">
         <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
@@ -138,6 +138,6 @@
         <actuator name="right_horizontal_thruster">
         <mechanicalReduction>1</mechanicalReduction>
         </actuator>
-    </transmission>
+    </transmission> -->
 
 </robot>
