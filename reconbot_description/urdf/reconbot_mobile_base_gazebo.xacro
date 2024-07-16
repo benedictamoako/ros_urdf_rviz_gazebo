@@ -56,23 +56,23 @@
         <plugin name='buoyancy_plugin' filename='libBuoyancyPlugin.so'>
             <fluid_density>999.1026</fluid_density>
             <link name='base_link'>
-            <center_of_buoyancy>-0.025 0 0.25</center_of_buoyancy>
-            <volume>0.00959081</volume>
-            <neutrally_buoyant>0</neutrally_buoyant>
+                <center_of_buoyancy>-0.025 0 0.25</center_of_buoyancy>
+                <volume>0.00959081</volume>
+                <neutrally_buoyant>0</neutrally_buoyant>
             </link>
         </plugin>
     </gazebo>
 
     <gazebo>
         <plugin name='hydrodynamics_plugin' filename='libHydrodynamicsPlugin.so'>
-        <link_name>base_link</link_name>
-        <fluid_density>999.1026</fluid_density>
-        <linear_drag_coefficients>10.0 10.0 10.0</linear_drag_coefficients>
-        <angular_drag_coefficients>1.0 1.0 1.0</angular_drag_coefficients>
+            <link_name>base_link</link_name>
+            <fluid_density>999.1026</fluid_density>
+            <linear_drag_coefficients>10.0 10.0 10.0</linear_drag_coefficients>
+            <angular_drag_coefficients>1.0 1.0 1.0</angular_drag_coefficients>
         </plugin>
     </gazebo>
 
-      <gazebo reference="base_link">
+    <!-- <gazebo reference="base_link">
         <gravity>true</gravity>
         <sensor name="imu_sensor" type="imu">
         <always_on>true</always_on>
@@ -91,7 +91,7 @@
         </plugin>
         <pose>0 0 0 0 0 0</pose>
         </sensor>
-    </gazebo>
+    </gazebo> -->
 
     <!-- <gazebo>
         <plugin name="rov_interface_plugin" filename="librov_interface_plugin.so">
@@ -100,10 +100,10 @@
         </plugin>
     </gazebo> -->
 
-    <!-- <gazebo>
+    <gazebo>
         <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
             <robotNamespace>/reconbot</robotNamespace>
         </plugin>
-    </gazebo> -->
+    </gazebo>
 
 </robot>

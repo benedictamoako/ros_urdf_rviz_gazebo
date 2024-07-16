@@ -10,11 +10,29 @@
             value="$(command 'xacro $(var urdf_path)')" />
     </node>
 
-    <!-- <include file="$(find-pkg-share gazebo_ros)/launch/gazebo.launch.py" /> -->
+    <!-- Load joint controller configurations from YAML file to parameter server -->
+    <!-- <rosparam command="load" file="$(find-pkg-share rrbot_control)/config/rrbot_control.yaml" /> -->
 
-    <!-- <node pkg="gazebo_ros" exec="spawn_entity.py" args="-topic robot_description -entity reconbot" /> -->
-    <node pkg="joint_state_publisher_gui" exec="joint_state_publisher_gui" />
+    <!-- <node pkg="joint_state_publisher_gui" exec="joint_state_publisher_gui" /> -->
 
     <node pkg="rviz2" exec="rviz2" output="screen" args="-d $(var rviz_config_path)"/>
+
+    <!-- load the controllers -->
+    <node
+        name="controller_spawner"
+        pkg="controller_manager"
+        exec="spawner"
+        output="screen"
+        namespace="/reconbot"
+        args="joint_state_controller">
+    </node>
+
+    <node
+        name="robot_state_publisher"
+        pkg="robot_state_publisher"
+        exec="robot_state_publisher"
+        output="screen">
+        <remap from="/joint_states" to="/rrbot/joint_states" />
+    </node>
 
 </launch>

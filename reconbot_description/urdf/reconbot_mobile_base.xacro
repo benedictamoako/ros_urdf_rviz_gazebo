@@ -28,7 +28,7 @@
 
     </link>
 
-    <xacro:macro name="thruster_link" params="prefix x y z p cx cp" >
+    <xacro:macro name="thruster_link" params="prefix x y z p cx cp ix iz" >
         <link name="${prefix}_thruster_link">
             <visual>
                 <geometry>
@@ -45,7 +45,7 @@
             </collision>
             <inertial>
                 <mass value="1.59521765" />
-                <origin xyz="0 0 0" rpy="0 0 0" />
+                <origin xyz="${ix} 0 ${iz}" rpy="0 0 0" />
                 <inertia ixx="0.00101028" ixy="-0.00019770" ixz="0.00000211" 
                         iyy="0.00434934" iyz="-0.00000027" 
                         izz="0.00462580" />
@@ -53,12 +53,12 @@
         </link>
     </xacro:macro>
 
-    <xacro:thruster_link prefix="right_horizontal" x="0.025" y="-0.135" z="-0.235" p="0" cx="0" cp="1.57" />
-    <xacro:thruster_link prefix="left_horizontal" x="0.025" y="-0.135" z="-0.235" p="0" cx="0" cp="1.57" />
-    <xacro:thruster_link prefix="back_right_vertical" x="-0.08" y="-0.135" z="-0.235" p="0.26" cx="-0.05" cp="1.8326" />
-    <xacro:thruster_link prefix="back_left_vertical" x="0.04" y="-0.135" z="-0.235" p="-0.26" cx="-0.05" cp="-1.8326"/>
-    <xacro:thruster_link prefix="front_left_vertical" x="-0.08" y="-0.135" z="-0.235" p="0.26" cx="-0.05" cp="1.8326"/>
-    <xacro:thruster_link prefix="front_right_vertical" x="0.04" y="-0.135" z="-0.235" p="-0.26" cx="-0.05" cp="-1.8326"/>
+    <xacro:thruster_link prefix="right_horizontal" x="0.025" y="-0.135" z="-0.235" p="0" cx="0" cp="1.57" ix="0" iz="0" />
+    <xacro:thruster_link prefix="left_horizontal" x="0.025" y="-0.135" z="-0.235" p="0" cx="0" cp="1.57" ix="0" iz="0" />
+    <xacro:thruster_link prefix="back_right_vertical" x="-0.08" y="-0.135" z="-0.235" p="0.26" cx="-0.05" cp="1.8326" ix="-0.05" iz="0" />
+    <xacro:thruster_link prefix="back_left_vertical" x="0.04" y="-0.135" z="-0.235" p="-0.26" cx="-0.05" cp="-1.8326" ix="-0.05" iz="-0.01" />
+    <xacro:thruster_link prefix="front_left_vertical" x="-0.08" y="-0.135" z="-0.235" p="0.26" cx="-0.05" cp="1.8326" ix="-0.05" iz="0" />
+    <xacro:thruster_link prefix="front_right_vertical" x="0.04" y="-0.135" z="-0.235" p="-0.26" cx="-0.05" cp="-1.8326" ix="-0.05" iz="-0.01" />
 
     <xacro:macro name="thruster_propeller_link" params="prefix x" >
         <link name="${prefix}_thruster_propeller_link">
@@ -77,7 +77,7 @@
             </collision>
             <inertial>
                 <mass value="0.12426508" />
-                <origin xyz="0 0 0" rpy="0 0 0" />
+                <origin xyz="0 0 0.025" rpy="0 0 0" />
                 <inertia ixx="0.00002949" ixy="0" ixz="0" 
                         iyy="0.00001860" iyz="0" 
                         izz="0.00002949" />
@@ -130,14 +130,15 @@
     <xacro:thruster_propeller_joint prefix="front_right_vertical" x="0.0455" y="0.0022" z="0.0125" p="1.309" />
 
      <!-- Transmission for the thruster -->
-    <!-- <transmission name="right_horizontal_thruster_propeller_trans">
+    <transmission name="right_horizontal_thruster_propeller_trans">
         <type>transmission_interface/SimpleTransmission</type>
         <joint name="right_horizontal_thruster_propeller_joint">
-        <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+            <hardwareInterface>EffortJointInterface</hardwareInterface>
         </joint>
         <actuator name="right_horizontal_thruster">
-        <mechanicalReduction>1</mechanicalReduction>
+            <mechanicalReduction>1</mechanicalReduction>
+            <hardwareInterface>EffortJointInterface</hardwareInterface>
         </actuator>
-    </transmission> -->
+    </transmission>
 
 </robot>

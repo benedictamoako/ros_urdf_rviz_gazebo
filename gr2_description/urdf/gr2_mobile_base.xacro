@@ -56,6 +56,28 @@
     <xacro:wheel_link prefix="left_back" />
     <xacro:wheel_link prefix="right_back" />
 
+    <link name="camera_link"> 
+        <visual>
+            <geometry>
+                <mesh filename="package://gr2_description/meshes/GR2_Cam_Mount.dae" />
+            </geometry>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <material name="grey" />
+        </visual>
+        <collision>
+            <geometry>
+                <box size="0.044 0.057 0.04" />
+            </geometry>
+            <origin xyz="0.0105 0.0125 0.0115" rpy="0 0 0" />
+        </collision>
+        <inertial>
+            <mass value="0.014" />
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <inertia ixx="3.888e-6" ixy="-6.953e-9" ixz="8.281e-9" 
+                    iyy="3.246e-6" iyz="1.170e-6" 
+                    izz="3.570e-6" />
+        </inertial>
+    </link>
 
     <joint name="base_joint" type="fixed" >
         <parent link="base_footprint" />
@@ -77,5 +99,9 @@
     <xacro:wheel_joint prefix="left_back" x="0.088" y="0.052" yw="1.57" ay="-1" />
     <xacro:wheel_joint prefix="right_back" x="-0.088" y="0.052" yw="-1.57" ay="1" />
 
-
+    <joint name="base_camera_joint" type="fixed">
+        <parent link="base_link"/>
+        <child link="camera_link"/>
+        <origin xyz="-0.01 -0.1045 0.028" rpy="0 0 0" />
+    </joint>
 </robot>

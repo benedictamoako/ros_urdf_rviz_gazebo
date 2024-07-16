@@ -6,3 +6,4 @@ reconbot:
   thruster_controller:
     type: effort_controllers/JointEffortController
     joint: right_horizontal_thruster_propeller_joint
+    pid: {p: 100.0, i: 0.01, d: 10.0}
