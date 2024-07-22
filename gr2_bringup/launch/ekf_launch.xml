@@ -1,0 +1,6 @@
+<!-- ekf_launch.xml -->
+<launch>
+  <node pkg="robot_localization" exec="ekf_node" name="ekf_filter_node" output="screen"
+        args="--ros-args --params-file $(find-pkg-share gr2_bringup)/config/ekf.yaml" >
+  </node>
+</launch>

@@ -28,6 +28,11 @@
     <gazebo>
         <plugin name="diff_drive_controller" filename="libgazebo_ros_diff_drive.so">
 
+            <ros>
+                <namespace>/robot</namespace>
+                <remapping>odom:=/odom</remapping>
+            </ros>
+
             <!-- Update rate in Hz -->
             <update_rate>50</update_rate>
 
@@ -44,8 +49,8 @@
             <wheel_diameter>0.062</wheel_diameter>
 
             <!-- limits -->
-            <!-- <max_wheel_torque>20</max_wheel_torque>
-            <max_wheel_acceleration>1.0</max_wheel_acceleration> -->
+            <max_wheel_torque>20</max_wheel_torque>
+            <max_wheel_acceleration>1.0</max_wheel_acceleration>
 
             <!-- input -->
             <command_topic>cmd_vel</command_topic>
@@ -100,6 +105,27 @@
             <distortionT1>0.0</distortionT1>
             <distortionT2>0.0</distortionT2>
         </plugin>
+        </sensor>
+    </gazebo>
+
+    <gazebo reference="base_link">
+        <gravity>true</gravity>
+        <sensor name="imu_sensor" type="imu">
+        <always_on>true</always_on>
+        <update_rate>100</update_rate>
+        <visualize>true</visualize>
+        <topic>__default_topic__</topic>
+        <plugin filename="libgazebo_ros_imu_sensor.so" name="imu_plugin">
+            <topicName>imu</topicName>
+            <bodyName>base_link</bodyName>
+            <updateRateHZ>10.0</updateRateHZ>
+            <gaussianNoise>0.0</gaussianNoise>
+            <xyzOffset>0 0 0</xyzOffset>
+            <rpyOffset>0 0 0</rpyOffset>
+            <frameName>base_link</frameName>
+            <initialOrientationAsReference>true</initialOrientationAsReference>
+        </plugin>
+        <pose>0 0 0 0 0 0</pose>
         </sensor>
     </gazebo>
 

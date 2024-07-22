@@ -61,7 +61,7 @@
             <geometry>
                 <mesh filename="package://gr2_description/meshes/GR2_Cam_Mount.dae" />
             </geometry>
-            <origin xyz="0 0 0" rpy="0 0 0" />
+            <origin xyz="0 0 0" rpy="0 0 1.57" />
             <material name="grey" />
         </visual>
         <collision>
@@ -102,6 +102,6 @@
     <joint name="base_camera_joint" type="fixed">
         <parent link="base_link"/>
         <child link="camera_link"/>
-        <origin xyz="-0.01 -0.1045 0.028" rpy="0 0 0" />
+        <origin xyz="-0.01 -0.1045 0.028" rpy="0 0 4.71" />
     </joint>
 </robot>
